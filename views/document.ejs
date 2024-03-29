@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentacion de la API</title>
+</head>
+<body>
+    <hr>
+    <h2> Modulo Clientes </h2>
+    <hr>
+    <h3> Requerimiento registrar Clientes </h3>
+
+    <table>
+        <tr><td>Numero</td><td>1</td></tr>
+        <tr><td>Nombre del servicio</td><td>registrar clientes</td></tr>
+        <tr><td>Uri</td><td>http://localhost:3000/SavrClientes/registrar</td></tr>
+        <tr><td>Descripcion</td><td>Permite al administrador registrar nuevos clientes</td></tr>
+        <tr><td>Verbo HTTP</td><td>POST</td></tr>
+        <tr><td>Header</td><td>NULL</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
+        <tr><td>Peticion JSON</td><td>
+            {<br>
+                "identificacion":3,<br>
+                "nombres": "Vargas",<br>
+                "direccion": "Calle Sexta #19Sur",<br>
+                "telefono": "31018786782",<br>
+                "fecha": "2005-02-20",<br>
+                "password": "12345678"<br>
+            } 
+        </td></tr>
+        <tr><td>Respuesta JSON</td><td>
+            Correcto:
+            Status:200
+            json:{
+                message:'cliente registrado con exito'
+            }
+          <br>
+          Incorrecto:
+          Status:403
+           JSON:{
+            message:"Ya existe un usuario con ese id"
+           }
+           <br>
+           Error:
+           Status:500
+           JSON:{
+            message:"Error de servidor"+error
+           }
+        </td></tr>
+        <tr>
+            <td> Programador </td>
+            <td> Sergio Andrés Vargas </td>
+        </tr>
+    </table>
+    <hr>
+    <h3> Requerimiento login Clientes </h3>
+
+    <table>
+        <tr><td>Numero</td><td>2</td></tr>
+        <tr><td>Nombre del servicio</td><td>login clientes</td></tr>
+        <tr><td>Uri</td><td>http://localhost:3000/SavrToken/login</td></tr>
+        <tr><td>Descripcion</td><td>Permite al administrador loguearse en el sistema</td></tr>
+        <tr><td>Verbo HTTP</td><td>POST</td></tr>
+        <tr><td>Header</td><td>NULL</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
+        <tr><td>Peticion JSON</td><td>
+            {<br>
+                "identificacion":3,<br>
+                "password": "12345678"<br>
+            } 
+        </td></tr>
+        <tr><td>Respuesta JSON</td><td>
+            Correcto:
+            Status:200 <br>
+            json:{<br>
+                {<br>
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWYyNjM3NDFhY2Q3OTJmMzAzNDBk <br>
+                    NzEiLCJpYXQiOjE3MTAzODkzNjcsImV4cCI6MTcxMDM5NjU2N30.i4LyR070zD9d6dBb7WWd31-OtPwxAMDK8sDdTBZ4pdI"
+                } <br>
+            }
+          <br>
+          Incorrecto:
+          Status:403
+           JSON:{
+            message:"Ya existe un usuario con ese id"
+           }
+           <br>
+           Status:404
+           JSON:{
+            message:Contraseña incorrecta
+           }
+           <br>
+           Error:
+           Status:500
+           JSON:{
+            message:"Error de servidor"+error
+           }
+        </td></tr>
+        <tr>
+            <td> Programador </td>
+            <td> Sergio Andrés Vargas </td>
+        </tr>
+    </table>
+    <hr>
+    <h3> Requerimiento listar Clientes </h3>
+
+    <table>
+        <tr><td>Numero</td><td>3</td></tr>
+        <tr><td>Nombre del servicio</td><td>listar clientes</td></tr>
+        <tr><td>Uri</td><td>http://localhost:3000/SavrClientes/listar</td></tr>
+        <tr><td>Descripcion</td><td>Permite al administrador listar todos los clientes</td></tr>
+        <tr><td>Verbo HTTP</td><td>GET</td></tr>
+        <tr><td>Header</td><td>TOKEN</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
+        <tr><td>Peticion JSON</td><td>
+        NULL
+        </td></tr>
+        <tr><td>Respuesta JSON</td><td>
+            Correcto:
+            Status:200
+            <br>
+            json:
+                [
+                <br>
+    {
+        <br>
+        "_id": "65f263741acd792f30340d71",
+        "identificacion": 1,
+        "nombres": "Sergio",
+        "direccion": "Calle Septima #19Sur",
+        "telefono": "31018786782",
+        "fecha": "2005-06-21T00:00:00.000Z",
+        "password": "$2a$10$.pWDeEo1O8BnMEY.4SnaQe7uk8aMDcXvzTbMNVqZEj42955hXULCq",
+        "__v": 0
+        <br>
+    },
+    <br>
+    {
+        <br>
+        "_id": "65f2639d1acd792f30340d74",
+        "identificacion": 2,
+        "nombres": "Andres",
+        "direccion": "Calle Octava #19Sur",
+        "telefono": "31018786782",
+        "fecha": "2005-12-21T00:00:00.000Z",
+        "password": "$2a$10$z0/rdur5rEH4F4RZ94WEsuNQNRo4TK0c.oFEMPar2V5m8QBMPizIe",
+        "__v": 0
+        <br>
+    }
+    <br>
+]
+<br>
+<br>
+          <br>
+          Incorrecto:
+          Status:404
+           JSON:{
+            message: 'No se encontraron clientes'
+           }
+           <br>
+           Error:
+           Status:500
+           JSON:{
+            message: 'Error en el sistema: ' + error
+           }
+        </td></tr>
+        <tr>
+            <td> Programador </td>
+            <td> Sergio Andrés Vargas </td>
+        </tr>
+</table>
+<hr>
+<h3> Requerimiento buscar clientes </h3>
+
+<table>
+    <tr><td>Numero</td><td>4</td></tr>
+    <tr><td>Nombre del servicio</td><td>buscar clientes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrClientes/buscar/65f263741acd792f30340d71</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador buscar por medio del _id buscar el cliente</td></tr>
+    <tr><td>Verbo HTTP</td><td>GET</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+    NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        json:{<br>
+            {
+                <br>
+                "_id": "65f263741acd792f30340d71",<br>
+                "identificacion": 1,<br>
+                "nombres": "Sergio",<br>
+                "direccion": "Calle Septima #19Sur",<br>
+                "telefono": "31018786782",<br>
+                "fecha": "2005-06-21T00:00:00.000Z",<br>
+                "password": "$2a$10$.pWDeEo1O8BnMEY.4SnaQe7uk8aMDcXvzTbMNVqZEj42955hXULCq",<br>
+                "__v": 0 <br>
+
+            }
+            <br>
+        }
+      <br>
+      Incorrecto:
+      Status:404
+       JSON:{
+        message: 'No encontramos al cliente con ese _id'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento eliminar clientes </h3>
+<table>
+    <tr><td>Numero</td><td>5</td></tr>
+    <tr><td>Nombre del servicio</td><td>eliminar clientes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrClientes/eliminar/65ee3fb87c92ba64191bf316</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador eliminar por medio del _id del cliente</td></tr>
+    <tr><td>Verbo HTTP</td><td>DELETE</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+    NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        json:{ message: 'Cliente eliminado con éxito'
+        }
+      <br>
+      Incorrecto:
+      Status:404
+       JSON:{
+        message: 'No se encontró al cliente con esa identificación'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message: 'Error en el sistema: ' + error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<h3> Requerimiento actualizar clientes </h3>
+<table>
+    <tr><td>Numero</td><td>6</td></tr>
+    <tr><td>Nombre del servicio</td><td>actualizar clientes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrClientes/actualizar/65ef9b9119a727212306b0a2</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador actualizar por medio del _id del cliente</td></tr>
+    <tr><td>Verbo HTTP</td><td>PUT</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        {<br>
+            "identificacion":1,<br>
+            "nombres": "Vargas Ramirez",<br>
+            "direccion": "Calle Sexta #19Sur",<br>
+            "telefono": "31018786782",<br>
+            "fecha": "2005-02-20",<br>
+            "password": "12345678"<br>
+        }
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        json:{ message:'los datos del cliente fueron actualizados con exito'
+        }
+      <br>
+      Incorrecto:
+      Status:404
+       JSON:{
+        message: 'No se encontró al cliente con esa identificación'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message: 'Error en el sistema: ' + error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h2> Modulo Articulos </h2>
+    <hr>
+    <h3> Requerimiento registrar Articulo </h3>
+    <table>
+        <tr><td>Numero</td><td>7</td></tr>
+        <tr><td>Nombre del servicio</td><td>registrar articulo</td></tr>
+        <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/registrar</td></tr>
+        <tr><td>Descripcion</td><td>Permite al administrador registrar nuevos articulos</td></tr>
+        <tr><td>Verbo HTTP</td><td>POST</td></tr>
+        <tr><td>Header</td><td>TOKEN</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
+        <tr><td>Peticion JSON</td><td>
+            <br>
+                {<br>
+                    "idarticulo": 2,<br>
+                    "nombre": "collar",<br>
+                    "tipo": "oro",<br>
+                    "estado": "activo"<br>
+                  }
+                  
+        </td></tr>
+        <tr><td>Respuesta JSON</td><td>
+            Correcto:
+            Status:201
+            json:{
+                message:"articulo registrado con exito"
+            }
+          <br>
+          Incorrecto:
+          Status:400
+           JSON:{
+            message:"Ya existe un articulo con ese id"
+           }
+           <br>
+           Error:
+           Status:500
+           JSON:{
+            message:"Error de servidor"+error
+           }
+        </td></tr>
+        <tr>
+            <td> Programador </td>
+            <td> Sergio Andrés Vargas </td>
+        </tr>
+    </table>
+    <hr>
+    <h3> Requerimiento listar Articulo </h3>
+    <table>
+        <tr><td>Numero</td><td>8</td></tr>
+        <tr><td>Nombre del servicio</td><td>listar articulos</td></tr>
+        <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/listar</td></tr>
+        <tr><td>Descripcion</td><td>Permite al administrador listar los articulos</td></tr>
+        <tr><td>Verbo HTTP</td><td>GET</td></tr>
+        <tr><td>Header</td><td>TOKEN</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
+        <tr><td>Peticion JSON</td><td>
+         NULL         
+        </td></tr>
+        <tr><td>Respuesta JSON</td><td>
+            Correcto:
+            Status:200
+            json: <br>
+                [<br>
+    {<br>
+        "_id": "65f2690a1acd792f30340d85",<br>
+        "idinteres": 1,<br>
+        "mes": 8,<br>
+        "fecha": "2002-07-28T00:00:00.000Z",<br>
+        "valor": 100000,<br>
+        "alquiler": "65f268cb1acd792f30340d82",<br>
+        "__v": 0 <br>
+    } <br>
+]
+          <br>
+          Incorrecto:
+          Status:400
+           JSON:{
+            message: 'No se encontraron articulos'
+           }
+           <br>
+           Error:
+           Status:500
+           JSON:{
+            message:"Error de servidor"+error
+           }
+        </td></tr>
+        <tr>
+            <td> Programador </td>
+            <td> Sergio Andrés Vargas </td>
+        </tr>
+</table>
+<hr>
+<h3> Requerimiento buscar Articulo </h3>
+<table>
+    <tr><td>Numero</td><td>9</td></tr>
+    <tr><td>Nombre del servicio</td><td>buscar articulos</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/buscar/65f2646b1acd792f30340d7c</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador buscar por _id los articulos</td></tr>
+    <tr><td>Verbo HTTP</td><td>GET</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+     NULL         
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200
+        json: <br>
+            [<br>
+{<br>
+    "_id": "65f2690a1acd792f30340d85",<br>
+    "idinteres": 1,<br>
+    "mes": 8,<br>
+    "fecha": "2002-07-28T00:00:00.000Z",<br>
+    "valor": 100000,<br>
+    "alquiler": "65f268cb1acd792f30340d82",<br>
+    "__v": 0 <br>
+} <br>
+]
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message: 'No se encontraron articulos'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento actualizar Articulo </h3>
+<table>
+    <tr><td>Numero</td><td>10</td></tr>
+    <tr><td>Nombre del servicio</td><td>actualizar articulos</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrArticulos/actualizar/65f268831acd792f30340d7f</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador actualizar los articulos</td></tr>
+    <tr><td>Verbo HTTP</td><td>PUT</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        JSON{<br>
+            "idarticulo": 2,<br>
+            "nombre": "castillo de oro",<br>
+            "tipo": "oro",<br>
+            "estado": "activo"<br>
+          }
+                
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200
+        json:  message:'los datos del articulo fueron actualizados con exito'
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message: 'No se encontró el articulo con esa identificación'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento desactivar Articulo </h3>
+<table>
+    <tr><td>Numero</td><td>11</td></tr>
+    <tr><td>Nombre del servicio</td><td>desactivar articulos</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrArticulos/desactivar/65f0ef5bc899bd19838c3db8</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador desactivar un articulo</td></tr>
+    <tr><td>Verbo HTTP</td><td>PUT</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200
+        json:  message: 'Artículo desactivado con éxito'
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message: 'No se encontró el artículo con esa identificación'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h2>Modulo Alquiler</h2>
+<hr>
+<h3> Requerimiento registrar Alquiler </h3>
+<table>
+    <tr><td>Numero</td><td>12</td></tr>
+    <tr><td>Nombre del servicio</td><td>registrar alquiler</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrAlquiler/registrar</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador registrar un alquiler</td></tr>
+    <tr><td>Verbo HTTP</td><td>POST</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        JSON{<br>
+            "idalquiler":1,<br>
+            "valor":200,<br>
+            "fecha":"2006-08-28",<br>
+            "meses":9,<br>
+            "descripcion":"emoji cabron",<br>
+            "intereses":10,<br>
+            "cliente":"65f263741acd792f30340d71",<br>
+            "articulo":"65f2646b1acd792f30340d7c"<br>
+        }
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200
+        json: message:'alquiler registrado con exito'
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message: 'Ya existe un usuario con ese id'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento listar Alquiler </h3>
+<table>
+    <tr><td>Numero</td><td>13</td></tr>
+    <tr><td>Nombre del servicio</td><td>listar alquiler</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrAlquiler/listar</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador listar los alquileres</td></tr>
+    <tr><td>Verbo HTTP</td><td>GET</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200
+        [<br>
+        {<br>
+            "_id": "65f282a1afaad21a849a5c75",<br>
+            "idalquiler": 1,<br>
+            "valor": 200,<br>
+            "fecha": "2006-08-28T00:00:00.000Z",<br>
+            "meses": 9,<br>
+            "descripcion": "emoji cabron",<br>
+            "intereses": 10,<br>
+            "cliente": "65f263741acd792f30340d71",<br>
+            "articulo": "65f2646b1acd792f30340d7c",<br>
+            "__v": 0 <br>
+        }br
+    ]
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message: 'No se encontraron Alquileres'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento buscar Alquiler </h3>
+<table>
+    <tr><td>Numero</td><td>14</td></tr>
+    <tr><td>Nombre del servicio</td><td>buscar alquiler</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrAlquiler/buscar/65f282a1afaad21a849a5c75</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador buscar un alquilerer</td></tr>
+    <tr><td>Verbo HTTP</td><td>GET</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200<br>
+        {<br>
+            "_id": "65f282a1afaad21a849a5c75",<br>
+            "idalquiler": 1,<br>
+            "valor": 200,<br>
+            "fecha": "2006-08-28T00:00:00.000Z",<br>
+            "meses": 9,<br>
+            "descripcion": "emoji cabron",<br>
+            "intereses": 10,<br>
+            "cliente": "65f263741acd792f30340d71",<br>
+            "articulo": "65f2646b1acd792f30340d7c",<br>
+            "__v": 0 <br>
+        }br
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message: 'No se encontraron Alquileres'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento eliminar Alquiler </h3>
+<table>
+    <tr><td>Numero</td><td>15</td></tr>
+    <tr><td>Nombre del servicio</td><td>eliminar alquiler</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrAlquiler/eliminar/65f282a1afaad21a849a5c75</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador eliminar un alquilerer</td></tr>
+    <tr><td>Verbo HTTP</td><td>DELETE</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        JSON:{
+            message: 'alquiler eliminado con éxito'
+        }
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message: 'No se encontró al alquiler con esa identificación'
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h2>Modulo Intereses</h2>
+<hr>
+<h3> Requerimiento registrar Interes </h3>
+<table>
+    <tr><td>Numero</td><td>16</td></tr>
+    <tr><td>Nombre del servicio</td><td>registrar un interes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/registrar</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador registrar un interes</td></tr>
+    <tr><td>Verbo HTTP</td><td>POST</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        {<br>
+            "idinteres":1,<br>
+            "mes":8,<br>
+            "fecha":"2002-07-28",<br>
+            "valor":100000,<br>
+            "alquiler":"65f268cb1acd792f30340d82"<br>
+        }
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        JSON:{
+            message: 'No se encontraron ningun interes'
+        }
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message:"Ya existe un alquiler con ese id"
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento listar Interes </h3>
+<table>
+    <tr><td>Numero</td><td>17</td></tr>
+    <tr><td>Nombre del servicio</td><td>listar los interes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/listar</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador listar los intereses</td></tr>
+    <tr><td>Verbo HTTP</td><td>GET</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+       NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        JSON:
+            [<br>
+            {<br>
+                "_id": "65f2690a1acd792f30340d85",<br>
+                "idinteres": 1,<br>
+                "mes": 10,<br>
+                "fecha": "2002-07-28T00:00:00.000Z",<br>
+                "valor": 200000,<br>
+                "alquiler": "65f282a1afaad21a849a5c75",<br>
+                "__v": 0 <br>
+            } <br>
+        ] <br>
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message:"No se encontraron ningun interes"
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento buscar Interes </h3>
+<table>
+    <tr><td>Numero</td><td>18</td></tr>
+    <tr><td>Nombre del servicio</td><td>buscar un interes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/buscar/65f2690a1acd792f30340d85</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador buscar los intereses</td></tr>
+    <tr><td>Verbo HTTP</td><td>GET</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+       NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        JSON:
+            {<br>
+                "_id": "65f2690a1acd792f30340d85",<br>
+                "idinteres": 1,<br>
+                "mes": 10,<br>
+                "fecha": "2002-07-28T00:00:00.000Z",<br>
+                "valor": 200000,<br>
+                "alquiler": "65f282a1afaad21a849a5c75",<br>
+                "__v": 0 <br>
+            } <br>
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message:"No se encontraron ningun interes con ese _id"
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento eliminar Interes </h3>
+<table>
+    <tr><td>Numero</td><td>19</td></tr>
+    <tr><td>Nombre del servicio</td><td>eliminar un interes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/buscar/65f2690a1acd792f30340d85</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador eliminar un interes</td></tr>
+    <tr><td>Verbo HTTP</td><td>DELETE</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+       NULL
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        JSON:
+        message :'intereses eliminado con éxito'
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message:"No se encontró al intereses con esa identificación"
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<hr>
+<h3> Requerimiento actualizar Interes </h3>
+<table>
+    <tr><td>Numero</td><td>20</td></tr>
+    <tr><td>Nombre del servicio</td><td>actualizar un interes</td></tr>
+    <tr><td>Uri</td><td>http://localhost:3000/SavrIntereses/actualizar/65f2690a1acd792f30340d85</td></tr>
+    <tr><td>Descripcion</td><td>Permite al administrador actualizar un interes</td></tr>
+    <tr><td>Verbo HTTP</td><td>PUT</td></tr>
+    <tr><td>Header</td><td>TOKEN</td></tr>
+    <tr><td>Usuarios</td><td>Administrador</td></tr>
+    <tr><td>Peticion JSON</td><td>
+        {<br>
+            "idinteres":1, <br>
+            "mes":10, <br>
+            "fecha":"2002-07-28", <br>
+            "valor":200000, <br>
+            "alquiler":"65f282a1afaad21a849a5c75" <br>
+        }
+    </td></tr>
+    <tr><td>Respuesta JSON</td><td>
+        Correcto:
+        Status:200 <br>
+        JSON:
+        message :'datos del intereses actualizados con exito'
+      <br>
+      Incorrecto:
+      Status:400
+       JSON:{
+        message:"No se encontró un intereses con ese identificación"
+       }
+       <br>
+       Error:
+       Status:500
+       JSON:{
+        message:"Error de servidor"+error
+       }
+    </td></tr>
+    <tr>
+        <td> Programador </td>
+        <td> Sergio Andrés Vargas </td>
+    </tr>
+</table>
+<table>
+    <h2> Modulo Busquedas </h2>
+        <hr>
+        <h3> Requerimiento busqueda 1 </h3>
+            <tr><td>Numero</td><td>21</td></tr>
+            <tr><td>Nombre del servicio</td><td>listar los interés pagados de los alquiler de un cliente </td></tr>
+            <tr><td>Uri</td><td>http://localhost:3000/SavrBusqueda1/busqueda/65f757b8c2be7daea787f2b7</td></tr>
+            <tr><td>Descripcion</td><td>Permite al administrador listar los interés pagados de los alquiler de un cliente</td></tr>
+            <tr><td>Verbo HTTP</td><td>GET</td></tr>
+            <tr><td>Header</td><td>TOKEN</td></tr>
+            <tr><td>Usuarios</td><td>Administrador</td></tr>
+            <tr><td>Peticion JSON</td><td>NULL
+            </td></tr>
+            <tr><td>Respuesta JSON</td><td>
+                Correcto:
+                Status:200
+                [<br>
+                { <br>
+                    "nombreCliente": "sergio vargas", <br>
+                    "alquiler": "65f7e1070e0aa0b5b7bd6168", <br>
+                    "articulo": "65f757d7c2be7daea787f2bb",<br>
+                    "mes": 8, <br>
+                    "valor": 100000 <br>
+                } <br>
+                ] 
+              <br>
+              Incorrecto:
+              Status:403
+               JSON:{
+                message:"Cliente no encontrado"
+               },
+               Status:404
+               JSON:{
+                message: "No se encontraron alquileres para este cliente"
+               },
+               Status:405
+               JSON:{
+                message: "No se encontraron intereses pagados por este cliente
+               }
+               <br>
+               Error:
+               Status:500
+               JSON:{
+                message:"Error en el servidor"+error
+               }
+            </td></tr>
+            <tr>
+                <td> Programador </td>
+                <td> Sergio Andrés Vargas </td>
+            </tr>
+        <hr>
+</table>
+<table>
+        <hr>
+        <h3> Requerimiento busqueda 2 </h3>
+            <tr><td>Numero</td><td>22</td></tr>
+            <tr><td>Nombre del servicio</td><td>listar el total de intereses recaudado en un mes y año </td></tr>
+            <tr><td>Uri</td><td>http://localhost:3000/SavrBusqueda2/busqueda2/2002-06-28</td></tr>
+            <tr><td>Descripcion</td><td>Permite al administrador listar el total de intereses recaudado en un mes y año</td></tr>
+            <tr><td>Verbo HTTP</td><td>GET</td></tr>
+            <tr><td>Header</td><td>TOKEN</td></tr>
+            <tr><td>Usuarios</td><td>Administrador</td></tr>
+            <tr><td>Peticion JSON</td><td>NULL
+            </td></tr>
+            <tr><td>Respuesta JSON</td><td>
+                Correcto:
+                Status:200 <br>
+                { <br>
+                    "message": "Total recaudado para la fecha 2002-06-28 es de: 100069" <br>
+                }
+              <br>
+               <br>
+               Error:
+               Status:500
+               JSON:{
+                message:"Error en el sistema"+error
+               }
+            </td></tr>
+            <tr>
+                <td> Programador </td>
+                <td> Sergio Andrés Vargas </td>
+            </tr>
+        <hr>
+</table>
+<table>
+        <hr>
+        <h3> Requerimiento busqueda 3 </h3>
+            <tr><td>Numero</td><td>23</td></tr>
+            <tr><td>Nombre del servicio</td><td>listar los meses y el interés pendiente por pagar de un alquiler </td></tr>
+            <tr><td>Uri</td><td>http://localhost:3000/SavrBusqueda1/busqueda/65f757b8c2be7daea787f2b7</td></tr>
+            <tr><td>Descripcion</td><td>Permite al administrador listar los meses y el interés pendiente por pagar de un alquiler</td></tr>
+            <tr><td>Verbo HTTP</td><td>GET</td></tr>
+            <tr><td>Header</td><td>TOKEN</td></tr>
+            <tr><td>Usuarios</td><td>Administrador</td></tr>
+            <tr><td>Peticion JSON</td><td>NULL
+            </td></tr>
+            <tr><td>Respuesta JSON</td><td>
+                Correcto:
+                Status:200 <br>
+                { <br>
+                    "id": "65f7e0530e0aa0b5b7bd615e", <br>
+                    "estado": "sin pagar", <br>
+                    "mes": 10, <br>
+                    "valor": 100 <br>
+                }
+              Incorrecto:
+              Status:404
+               JSON:{
+                message:"no fue posible encontrar este interes"
+               },
+               Status:403
+               JSON:{
+                menssage: 'este interes ya fue pagado'
+               }
+               <br>
+               Error:
+               Status:500
+               JSON:{
+                message:"Error en el servidor"+error
+               }
+            </td></tr>
+            <tr>
+                <td> Programador </td>
+                <td> Sergio Andrés Vargas </td>
+            </tr>
+        <hr>
+</table>
